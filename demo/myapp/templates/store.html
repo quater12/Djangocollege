@@ -1,0 +1,31 @@
+<!-- filepath: d:\python\demo\myapp\templates\store.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Store{% endblock %}
+
+{% block content %}
+<h1>Store</h1>
+<ul>
+    {% for item in page_obj %}
+        <li>
+            <strong>{{ item.name }}</strong> - {{ item.price }}<br>
+            Category: {{ item.category.name }}<br>
+            {{ item.description }}
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Pagination controls -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">Next</a>
+    {% endif %}
+</div>
+{% endblock %}
